@@ -96,7 +96,7 @@ private:
 				sched_class_ = static_cast<unsigned int>(parse_uint());
 				if (sched_class_.value() < 0 || sched_class_.value() > 9)
 				{
-					std::cout << "Scheduling class value must be 0-9, but got: " << sched_class_.value() << '\n';
+					std::wcout << "Scheduling class value must be 0-9, but got: " << sched_class_.value() << '\n';
 					usage();
 				}
 			}
@@ -105,7 +105,7 @@ private:
 				cpu_rate_ = static_cast<unsigned int>(parse_uint());
 				if (cpu_rate_.value() <= 0 || cpu_rate_.value() > 100)
 				{
-					std::cout << "CPU rate must be 1-100 (%), but got: " << cpu_rate_.value() << '\n';
+					std::wcout << "CPU rate must be 1-100 (%), but got: " << cpu_rate_.value() << '\n';
 					usage();
 				}
 			}
@@ -114,7 +114,7 @@ private:
 				cpu_weight_ = static_cast<unsigned int>(parse_uint());
 				if (cpu_weight_.value() < 1 || cpu_weight_.value() > 9)
 				{
-					std::cout << "Scheduling weight must be 1-9, but got: " << cpu_weight_.value() << '\n';
+					std::wcout << "Scheduling weight must be 1-9, but got: " << cpu_weight_.value() << '\n';
 					usage();
 				}
 			}
@@ -129,7 +129,7 @@ private:
 		}
 		if (application_.empty())
 		{
-			std::cout << "Expected: application name\n";
+			std::wcout << "Expected: application name\n";
 			usage();
 		}
 	}
@@ -138,14 +138,14 @@ private:
 	{
 		if (current_ == argc_ - 1)
 		{
-			std::cout << "Expected: integer value\n";
+			std::wcout << "Expected: integer value\n";
 			usage();
 		}
 		++current_;
 		auto value = std::wcstoul(argv_[current_], nullptr, 10);
 		if (value == 0)
 		{
-			std::cout << "Expected: integer value, found '" << argv_[current_] << "'\n";
+			std::wcout << "Expected: integer value, found '" << argv_[current_] << "'\n";
 			usage();
 		}
 		return value;
@@ -155,7 +155,7 @@ private:
 	{
 		if (current_ == argc_ - 1)
 		{
-			std::cout << "Expected: Boolean value (\"yes\" or \"no\")\n";
+			std::wcout << "Expected: Boolean value (\"yes\" or \"no\")\n";
 			usage();
 		}
 		++current_;
@@ -169,43 +169,43 @@ private:
 		}
 		else
 		{
-			std::cout << "Expected: Boolean value (\"yes\" or \"no\"), found '" << argv_[current_] << "'\n";
+			std::wcout << "Expected: Boolean value (\"yes\" or \"no\"), found '" << argv_[current_] << "'\n";
 			usage();
 		}
 	}
 
 	[[noreturn]] void usage()
 	{
-		std::cout << '\n';
-		std::cout << "jobrun - run a process inside a job and limit its behavior\n";
-		std::cout << "         copyright (C) 2017 Sasha Goldshtein\n";
-		std::cout << '\n';
-		std::cout << "USAGE: jobrun [-M MEGABYTES] [-m MEGABYTES] [-w MEGABYTES] [-c SECONDS]\n";
-		std::cout << "              [-n NUMPROCS] [-b yes|no] [-a AFFINITY] [-p PRIORITY]\n";
-		std::cout << "              [-s SCHEDCLASS] [-r CPURATE] [-t CPUWEIGHT] [-u UIRESTRS]\n";
-		std::cout << "              <application>\n";
-		std::cout << '\n';
-		std::cout << "  -M MEGABYTES   Limit the total committed memory of the job's processes\n";
-		std::cout << "  -m MEGABYTES   Limit the committed memory of each of the job's processes\n";
-		std::cout << "  -w MEGABYTES   Limit the process working set of each of the job's processes (soft limit)\n";
-		std::cout << "  -c SECONDS     Limit the total CPU time of the job's processes\n";
-		std::cout << "  -n NUMPROCS    Limit the number of processes in the job\n";
-		std::cout << "  -b yes|no      Allow job processes to break away\n";
-		std::cout << "  -a AFFINITY    Set the processor affinity of the job's processes\n";
-		std::cout << "  -p PRIORITY    Set the priority class of the job's processes\n";
-		std::cout << "  -s SCHEDCLASS  Set the scheduling class (0-9) of the job's processes\n";
-		std::cout << "  -r CPURATE     Set the portion (%) of the CPU cycles this job's threads can use\n";
-		std::cout << "  -t CPUWEIGHT   Set the scheduling weight (1-9) of the job object\n";
-		std::cout << "  -u UIRESTRS    Set the UI restriction class for the job's processes, a bitmask:\n";
-		std::cout << "                     1 - prevent using USER handles from other processes\n";
-		std::cout << "                     2 - prevent reading the clipboard\n";
-		std::cout << "                     4 - prevent writing the clipboard\n";
-		std::cout << "                     8 - prevent changing system parameters with SystemParametersInfo\n";
-		std::cout << "                    16 - prevent changing display settings with ChangeDisplaySettings\n";
-		std::cout << "                    32 - prevent accessing global atoms\n";
-		std::cout << "                    64 - prevent creating desktops and switching desktops\n";
-		std::cout << "                   128 - prevent shutting down or restarting with ExitWindows(Ex)\n";
-		std::cout << '\n';
+		std::wcout << '\n';
+		std::wcout << "jobrun - run a process inside a job and limit its behavior\n";
+		std::wcout << "         copyright (C) 2017 Sasha Goldshtein\n";
+		std::wcout << '\n';
+		std::wcout << "USAGE: jobrun [-M MEGABYTES] [-m MEGABYTES] [-w MEGABYTES] [-c SECONDS]\n";
+		std::wcout << "              [-n NUMPROCS] [-b yes|no] [-a AFFINITY] [-p PRIORITY]\n";
+		std::wcout << "              [-s SCHEDCLASS] [-r CPURATE] [-t CPUWEIGHT] [-u UIRESTRS]\n";
+		std::wcout << "              <application>\n";
+		std::wcout << '\n';
+		std::wcout << "  -M MEGABYTES   Limit the total committed memory of the job's processes\n";
+		std::wcout << "  -m MEGABYTES   Limit the committed memory of each of the job's processes\n";
+		std::wcout << "  -w MEGABYTES   Limit the process working set of each of the job's processes (soft limit)\n";
+		std::wcout << "  -c SECONDS     Limit the total CPU time of the job's processes\n";
+		std::wcout << "  -n NUMPROCS    Limit the number of processes in the job\n";
+		std::wcout << "  -b yes|no      Allow job processes to break away\n";
+		std::wcout << "  -a AFFINITY    Set the processor affinity of the job's processes\n";
+		std::wcout << "  -p PRIORITY    Set the priority class of the job's processes\n";
+		std::wcout << "  -s SCHEDCLASS  Set the scheduling class (0-9) of the job's processes\n";
+		std::wcout << "  -r CPURATE     Set the portion (%) of the CPU cycles this job's threads can use\n";
+		std::wcout << "  -t CPUWEIGHT   Set the scheduling weight (1-9) of the job object\n";
+		std::wcout << "  -u UIRESTRS    Set the UI restriction class for the job's processes, a bitmask:\n";
+		std::wcout << "                     1 - prevent using USER handles from other processes\n";
+		std::wcout << "                     2 - prevent reading the clipboard\n";
+		std::wcout << "                     4 - prevent writing the clipboard\n";
+		std::wcout << "                     8 - prevent changing system parameters with SystemParametersInfo\n";
+		std::wcout << "                    16 - prevent changing display settings with ChangeDisplaySettings\n";
+		std::wcout << "                    32 - prevent accessing global atoms\n";
+		std::wcout << "                    64 - prevent creating desktops and switching desktops\n";
+		std::wcout << "                   128 - prevent shutting down or restarting with ExitWindows(Ex)\n";
+		std::wcout << '\n';
 		std::exit(1);
 	}
 };
@@ -442,12 +442,12 @@ int wmain(int argc, wchar_t* argv[])
 			job.set_ui_restrictions(args.ui_restrictions().value());
 		job.run_process_in_job(args.application());
 
-		std::cout << "Press ENTER to exit the job\n";
+		std::wcout << "Press ENTER to exit the job\n";
 		std::cin.get();
 	}
 	catch (job_exception& je)
 	{
-		std::cout << je.what() << " with error code: " << je.error() << '\n';
+		std::wcout << je.what() << " with error code: " << je.error() << '\n';
 	}
 
 	return 0;
